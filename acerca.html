@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>KumiLab · Acerca de</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="./">Kumi<span>Lab</span></a>
+  <nav class="nav">
+    <a href="index.html">Catálogo</a>
+    <a href="categorias.html">Categorías</a>
+    <a class="active" href="acerca.html">Acerca de</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+</header>
+<main class="container narrow">
+  <h1>Acerca de KumiLab</h1>
+  <p>KumiLab desarrolla soluciones en laboratorio y venta de insumos con foco en calidad, trazabilidad y soporte técnico.</p>
+  <ul>
+    <li>Catálogo centralizado alimentado desde Google Sheets.</li>
+    <li>Imágenes administradas en Google Drive.</li>
+    <li>Diseño responsivo, rápido y accesible.</li>
+    <li>PWA con caché para navegación sin conexión básica.</li>
+  </ul>
+</main>
+<footer class="footer">
+  <p>© <span id="y"></span> KumiLab.</p>
+</footer>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

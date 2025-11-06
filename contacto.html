@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>KumiLab · Contacto</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="./">Kumi<span>Lab</span></a>
+  <nav class="nav">
+    <a href="index.html">Catálogo</a>
+    <a href="categorias.html">Categorías</a>
+    <a href="acerca.html">Acerca de</a>
+    <a class="active" href="contacto.html">Contacto</a>
+  </nav>
+</header>
+<main class="container narrow">
+  <h1>Contacto</h1>
+  <p>Para cotizaciones o consultas, complete el formulario o escriba por WhatsApp.</p>
+  <form class="form" action="https://formspree.io/f/mnqkkwra" method="POST">
+    <label>Nombre<input type="text" name="nombre" required></label>
+    <label>Correo<input type="email" name="correo" required></label>
+    <label>Mensaje<textarea name="mensaje" rows="6" required></textarea></label>
+    <button type="submit">Enviar</button>
+  </form>
+  <p class="muted">Puede reemplazar el endpoint por su servicio preferido o Google Apps Script WebApp.</p>
+</main>
+<footer class="footer">
+  <p>© <span id="y"></span> KumiLab.</p>
+</footer>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

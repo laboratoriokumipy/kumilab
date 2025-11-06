@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>KumiLab · Categorías</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script defer src="js/config.js"></script>
+  <script defer src="js/utils.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const cont = document.getElementById('categories');
+      const rows = await window.kumi.fetchSheet();
+      const products = rows.map(window.kumi.normalizeProduct).filter(p => p.nombre);
+      const cats = Array.from(new Set(products.map(p => p.categoria || 'General'))).sort();
+      cont.innerHTML = cats.map(c => 
+        `<a class="catcard" href="index.html?categoria=${window.kumi.slug(c)}">
+           <span>${c}</span>
+         </a>`
+      ).join('');
+    });
+  </script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="./">Kumi<span>Lab</span></a>
+  <nav class="nav">
+    <a href="index.html">Catálogo</a>
+    <a class="active" href="categorias.html">Categorías</a>
+    <a href="acerca.html">Acerca de</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+</header>
+<main class="container">
+  <h1>Categorías</h1>
+  <div id="categories" class="catgrid"></div>
+</main>
+<footer class="footer">
+  <p>© <span id="y"></span> KumiLab.</p>
+</footer>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

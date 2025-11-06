@@ -1,0 +1,9 @@
+{
+  "name": "KumiLab Catálogo",
+  "short_name": "KumiLab",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0e1111",
+  "theme_color": "#0b7a6e",
+  "icons": []
+}
