@@ -1,46 +1,152 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>KumiLab · Categorías</title>
-  <link rel="stylesheet" href="assets/styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <script defer src="js/config.js"></script>
-  <script defer src="js/utils.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      const cont = document.getElementById('categories');
-      const rows = await window.kumi.fetchSheet();
-      const products = rows.map(window.kumi.normalizeProduct).filter(p => p.nombre);
-      const cats = Array.from(new Set(products.map(p => p.categoria || 'General'))).sort();
-      cont.innerHTML = cats.map(c => 
-        `<a class="catcard" href="index.html?categoria=${window.kumi.slug(c)}">
-           <span>${c}</span>
-         </a>`
-      ).join('');
-    });
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo - Laboratorios Kumi</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="./">Kumi<span>Lab</span></a>
-  <nav class="nav">
-    <a href="index.html">Catálogo</a>
-    <a class="active" href="categorias.html">Categorías</a>
-    <a href="acerca.html">Acerca de</a>
-    <a href="contacto.html">Contacto</a>
-  </nav>
-</header>
-<main class="container">
-  <h1>Categorías</h1>
-  <div id="categories" class="catgrid"></div>
-</main>
-<footer class="footer">
-  <p>© <span id="y"></span> KumiLab.</p>
-</footer>
-<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/logo-kumi.png" alt="Laboratorios Kumi">
+                </a>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="categorias.html" class="active">Catálogo</a></li>
+                    <li><a href="acerca.html">Nosotros</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Nuestro Catálogo</h1>
+            <p>Descubre nuestra amplia gama de productos naturales para tu bienestar</p>
+        </div>
+    </section>
+
+    <!-- Catalog Filters -->
+    <section class="catalog-filters">
+        <div class="container">
+            <div class="filters-container">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Buscar productos...">
+                    <button id="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="filter-group">
+                    <label for="category-filter">Categoría:</label>
+                    <select id="category-filter">
+                        <option value="all">Todas las categorías</option>
+                        <option value="suplementos">Suplementos</option>
+                        <option value="vitaminas">Vitaminas</option>
+                        <option value="minerales">Minerales</option>
+                        <option value="extractos">Extractos Naturales</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sort-by">Ordenar por:</label>
+                    <select id="sort-by">
+                        <option value="name">Nombre A-Z</option>
+                        <option value="name-desc">Nombre Z-A</option>
+                        <option value="price">Precio: Menor a Mayor</option>
+                        <option value="price-desc">Precio: Mayor a Menor</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="products-section">
+        <div class="container">
+            <div class="products-count">
+                <span id="products-count">0</span> productos encontrados
+            </div>
+            <div class="products-grid" id="products-grid">
+                <!-- Los productos se cargan dinámicamente con JavaScript -->
+            </div>
+            <div class="pagination" id="pagination">
+                <!-- La paginación se genera dinámicamente -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>¿No encuentras lo que buscas?</h2>
+                <p>Contáctanos y te ayudaremos a encontrar el producto perfecto para tus necesidades.</p>
+                <a href="contacto.html" class="btn btn-primary">Contactar</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <img src="assets/images/logo-kumi.png" alt="Laboratorios Kumi">
+                    </div>
+                    <p>Laboratorios Kumi se dedica a proporcionar productos naturales de la más alta calidad para mejorar tu bienestar y salud.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="categorias.html">Catálogo</a></li>
+                        <li><a href="acerca.html">Nosotros</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categorías</h3>
+                    <ul>
+                        <li><a href="categorias.html?category=suplementos">Suplementos</a></li>
+                        <li><a href="categorias.html?category=vitaminas">Vitaminas</a></li>
+                        <li><a href="categorias.html?category=minerales">Minerales</a></li>
+                        <li><a href="categorias.html?category=extractos">Extractos Naturales</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Dirección: Asunción, Paraguay</li>
+                        <li><i class="fas fa-phone"></i> Teléfono: +595 21 123 456</li>
+                        <li><i class="fas fa-envelope"></i> Email: info@laboratorioskumi.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Laboratorios Kumi. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/catalog.js"></script>
 </body>
 </html>
