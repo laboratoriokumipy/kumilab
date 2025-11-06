@@ -1,0 +1,73 @@
+/* Estilos base */
+:root{
+  --bg:#0e1111; --card:#121517; --muted:#aab7b7; --text:#e9f3f2; --primary:#0b7a6e; --accent:#00c2a8; --ring:#1df0c9;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,#0e1111 0%,#141a1a 100%);color:var(--text)}
+
+.topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:12px 24px;background:rgba(14,17,17,.75);backdrop-filter:blur(8px);border-bottom:1px solid #233}
+.brand{font-weight:800;font-size:20px;letter-spacing:.5px;text-decoration:none;color:var(--text)}
+.brand span{color:var(--accent)}
+.nav a{color:var(--muted);margin-left:16px;text-decoration:none;padding:8px 10px;border-radius:8px}
+.nav a.active,.nav a:hover{color:var(--text);background:#182122}
+
+.hero{padding:32px 24px 8px;border-bottom:1px solid #233}
+.hero h1{margin:0 0 8px;font-size:28px}
+.hero p{margin:0 0 16px;color:var(--muted)}
+.controls{display:grid;grid-template-columns:1fr 220px;gap:12px;align-items:center}
+.controls input,.controls select{padding:10px 12px;border-radius:10px;border:1px solid #2a3d3d;background:#0f1414;color:var(--text);outline:none}
+.chipbar{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid #2a3d3d;padding:6px 10px;border-radius:999px;color:var(--muted);cursor:pointer}
+.chip.active{background:var(--primary);color:white;border-color:transparent}
+
+.container{max-width:1100px;margin:0 auto;padding:24px}
+.container.narrow{max-width:840px}
+.summary{color:var(--muted);margin-bottom:8px}
+
+.grid{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:16px}
+@media(min-width:640px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:980px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+.card{background:var(--card);border:1px solid #233;border-radius:16px;overflow:hidden;box-shadow:0 2px 0 #0b1414}
+.thumb{position:relative;aspect-ratio:4/3;background:#0c1010}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .3s ease}
+.thumb img.loaded{opacity:1}
+.badges{position:absolute;top:8px;left:8px;display:flex;gap:6px}
+.badge{font-size:12px;background:#0b7a6e;color:#eafffb;padding:4px 8px;border-radius:999px;border:1px solid #1a8;}
+
+.body{padding:14px 14px 16px}
+.title{font-weight:700;margin:0 0 6px;font-size:18px}
+.meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.price{font-weight:800}
+.cat{font-size:13px;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{font-size:12px;color:#8ec; background:#0f1717;border:1px solid #1e2d2d;padding:3px 8px;border-radius:999px}
+
+.actions{display:flex;gap:8px;margin-top:10px}
+.actions a,.actions button{flex:1;text-align:center;background:#123;border:1px solid #234;color:#bfe; padding:10px;border-radius:10px;text-decoration:none}
+.actions a.cta{background:linear-gradient(135deg,var(--primary),var(--accent));border:none;color:#002b2b;font-weight:800}
+.actions a:hover,.actions button:hover{filter:brightness(1.05)}
+
+.pager{display:flex;gap:8px;justify-content:center;margin-top:18px}
+.pager button{background:#0f1616;color:#cff;border:1px solid #244;padding:8px 12px;border-radius:8px}
+.pager button[disabled]{opacity:.4}
+
+.footer{border-top:1px solid #233;padding:18px 24px;color:var(--muted);text-align:center;margin-top:24px}
+
+.backlink{margin-top:16px}
+.muted{color:var(--muted)}
+
+.gallery{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+.gallery img{width:100%;border-radius:12px;border:1px solid #233;background:#0d1313}
+.gallery figure{margin:0}
+.specs{margin-top:16px;border:1px solid #233;border-radius:12px;padding:14px;background:#101515}
+.specs h3{margin-top:0}
+.specs table{width:100%;border-collapse:collapse}
+.specs td{padding:8px;border-bottom:1px solid #1b2a2a;color:#dff}
+.catgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.catcard{display:block;padding:22px;border-radius:16px;background:var(--card);text-decoration:none;color:var(--text);border:1px solid #233}
+.catcard:hover{border-color:#2dd2bd}
+.form{display:grid;gap:12px}
+.form input,.form textarea,.form button{padding:12px;border-radius:10px;border:1px solid #2a3d3d;background:#0f1414;color:var(--text)}
+.form button{cursor:pointer;background:linear-gradient(135deg,var(--primary),var(--accent));border:none;color:#002b2b;font-weight:800}
