@@ -1,37 +1,182 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>KumiLab · Acerca de</title>
-  <link rel="stylesheet" href="assets/styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca de - Laboratorios Kumi</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="./">Kumi<span>Lab</span></a>
-  <nav class="nav">
-    <a href="index.html">Catálogo</a>
-    <a href="categorias.html">Categorías</a>
-    <a class="active" href="acerca.html">Acerca de</a>
-    <a href="contacto.html">Contacto</a>
-  </nav>
-</header>
-<main class="container narrow">
-  <h1>Acerca de KumiLab</h1>
-  <p>KumiLab desarrolla soluciones en laboratorio y venta de insumos con foco en calidad, trazabilidad y soporte técnico.</p>
-  <ul>
-    <li>Catálogo centralizado alimentado desde Google Sheets.</li>
-    <li>Imágenes administradas en Google Drive.</li>
-    <li>Diseño responsivo, rápido y accesible.</li>
-    <li>PWA con caché para navegación sin conexión básica.</li>
-  </ul>
-</main>
-<footer class="footer">
-  <p>© <span id="y"></span> KumiLab.</p>
-</footer>
-<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/logo-kumi.png" alt="Laboratorios Kumi">
+                </a>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="categorias.html">Catálogo</a></li>
+                    <li><a href="acerca.html" class="active">Nosotros</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Acerca de Laboratorios Kumi</h1>
+            <p>Conoce nuestra historia, misión y valores</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-content">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>Nuestra Historia</h2>
+                    <p>Laboratorios Kumi nació en 2010 con la visión de proporcionar productos naturales de la más alta calidad, respaldados por la ciencia y elaborados con ingredientes puros. Fundada por un equipo de profesionales de la salud y expertos en fitoterapia, nuestra empresa se ha consolidado como un referente en el sector de los suplementos naturales.</p>
+                    
+                    <h2>Misión</h2>
+                    <p>Nuestra misión es mejorar la calidad de vida de las personas a través de productos naturales innovadores, eficaces y seguros, promoviendo el bienestar integral y el cuidado del medio ambiente.</p>
+                    
+                    <h2>Visión</h2>
+                    <p>Aspiramos a ser la empresa líder en soluciones naturales para la salud en Paraguay y la región, reconocida por nuestra excelencia, innovación y compromiso con la sostenibilidad.</p>
+                    
+                    <h2>Valores</h2>
+                    <ul class="values-list">
+                        <li><strong>Calidad:</strong> Nos comprometemos con los más altos estándares en todos nuestros procesos.</li>
+                        <li><strong>Integridad:</strong> Actuamos con honestidad y transparencia en todo lo que hacemos.</li>
+                        <li><strong>Innovación:</strong> Investigamos y desarrollamos constantemente para ofrecer productos de vanguardia.</li>
+                        <li><strong>Sostenibilidad:</strong> Respetamos el medio ambiente y promovemos prácticas responsables.</li>
+                        <li><strong>Compromiso con la salud:</strong> Priorizamos el bienestar de nuestros clientes en cada decisión.</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="assets/images/about-us.jpg" alt="Acerca de Laboratorios Kumi">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <h2 class="section-title">Nuestro Equipo</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="assets/images/team1.jpg" alt="Dr. Juan Pérez">
+                    </div>
+                    <h3>Dr. Juan Pérez</h3>
+                    <p class="member-role">Director Médico</p>
+                    <p>Médico especializado en medicina natural con más de 15 años de experiencia.</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="assets/images/team2.jpg" alt="Dra. María García">
+                    </div>
+                    <h3>Dra. María García</h3>
+                    <p class="member-role">Directora de Investigación</p>
+                    <p>Bioquímica con maestría en fitoterapia y desarrollo de productos naturales.</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="assets/images/team3.jpg" alt="Lic. Carlos López">
+                    </div>
+                    <h3>Lic. Carlos López</h3>
+                    <p class="member-role">Gerente de Producción</p>
+                    <p>Ingeniero en alimentos con especialización en procesos de extracción natural.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="certifications">
+        <div class="container">
+            <h2 class="section-title">Certificaciones y Estándares</h2>
+            <div class="certs-grid">
+                <div class="cert-item">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Buenas Prácticas de Manufactura</h3>
+                    <p>Cumplimos con las BPM para garantizar la calidad y seguridad de nuestros productos.</p>
+                </div>
+                <div class="cert-item">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Ingredientes Naturales</h3>
+                    <p>Utilizamos solo ingredientes 100% naturales, libres de químicos dañinos.</p>
+                </div>
+                <div class="cert-item">
+                    <i class="fas fa-flask"></i>
+                    <h3>Control de Calidad</h3>
+                    <p>Realizamos controles rigurosos en cada etapa del proceso productivo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <img src="assets/images/logo-kumi.png" alt="Laboratorios Kumi">
+                    </div>
+                    <p>Laboratorios Kumi se dedica a proporcionar productos naturales de la más alta calidad para mejorar tu bienestar y salud.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="categorias.html">Catálogo</a></li>
+                        <li><a href="acerca.html">Nosotros</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categorías</h3>
+                    <ul>
+                        <li><a href="categorias.html?category=suplementos">Suplementos</a></li>
+                        <li><a href="categorias.html?category=vitaminas">Vitaminas</a></li>
+                        <li><a href="categorias.html?category=minerales">Minerales</a></li>
+                        <li><a href="categorias.html?category=extractos">Extractos Naturales</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Dirección: Asunción, Paraguay</li>
+                        <li><i class="fas fa-phone"></i> Teléfono: +595 21 123 456</li>
+                        <li><i class="fas fa-envelope"></i> Email: info@laboratorioskumi.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Laboratorios Kumi. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>
