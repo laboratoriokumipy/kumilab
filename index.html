@@ -1,60 +1,204 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>KumiLab · Catálogo</title>
-  <meta name="theme-color" content="#0b7a6e">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css">
-  <script defer src="js/config.js"></script>
-  <script defer src="js/utils.js"></script>
-  <script defer src="js/app.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorios Kumi - Productos Naturales</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="./">Kumi<span>Lab</span></a>
-  <nav class="nav">
-    <a href="index.html" class="active">Catálogo</a>
-    <a href="categorias.html">Categorías</a>
-    <a href="acerca.html">Acerca de</a>
-    <a href="contacto.html">Contacto</a>
-  </nav>
-</header>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo-kumi.png" alt="Laboratorios Kumi">
+                </a>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html" class="active">Inicio</a></li>
+                    <li><a href="catalog.html">Catálogo</a></li>
+                    <li><a href="about.html">Nosotros</a></li>
+                    <li><a href="contact.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
 
-<section class="hero">
-  <h1>Catálogo de Productos</h1>
-  <p>Resultados actualizados desde Google Sheets, con imágenes servidas desde Google Drive.</p>
-  <div class="controls">
-    <input id="search" type="search" placeholder="Buscar nombre, categoría o etiqueta">
-    <select id="order">
-      <option value="relevance">Ordenar por relevancia</option>
-      <option value="name_asc">Nombre A→Z</option>
-      <option value="name_desc">Nombre Z→A</option>
-      <option value="price_asc">Precio más bajo</option>
-      <option value="price_desc">Precio más alto</option>
-      <option value="recent">Más recientes</option>
-    </select>
-    <div class="chipbar" id="chipbar"></div>
-  </div>
-</section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Bienestar Natural para una Vida Saludable</h1>
+                <p>Laboratorios Kumi ofrece productos naturales de la más alta calidad, elaborados con ingredientes puros y respaldados por la ciencia.</p>
+                <div class="hero-buttons">
+                    <a href="catalog.html" class="btn btn-primary">Ver Catálogo</a>
+                    <a href="about.html" class="btn btn-secondary">Conócenos</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://via.placeholder.com/600x400" alt="Productos Kumi" id="hero-product-img">
+            </div>
+        </div>
+    </section>
 
-<main class="container">
-  <div id="summary" class="summary"></div>
-  <div id="grid" class="grid"></div>
-  <div id="pager" class="pager"></div>
-</main>
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">¿Por qué elegir Laboratorios Kumi?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Ingredientes Naturales</h3>
+                    <p>Utilizamos solo ingredientes 100% naturales, libres de químicos dañinos y conservantes artificiales.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>Investigación Científica</h3>
+                    <p>Nuestros productos están respaldados por investigación científica y desarrollados por expertos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Calidad Garantizada</h3>
+                    <p>Cumplimos con los más altos estándares de calidad en cada etapa de producción.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Compromiso con tu Salud</h3>
+                    <p>Nos preocupamos por tu bienestar integral, ofreciendo soluciones naturales para mejorar tu calidad de vida.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<footer class="footer">
-  <p>© <span id="y"></span> KumiLab. Catálogo dinámico con Google Sheets.</p>
-</footer>
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="container">
+            <h2 class="section-title">Productos Destacados</h2>
+            <div class="products-grid" id="featured-products">
+                <!-- Los productos se cargan dinámicamente con JavaScript -->
+            </div>
+            <div class="text-center">
+                <a href="catalog.html" class="btn btn-outline">Ver Todos los Productos</a>
+            </div>
+        </div>
+    </section>
 
-<script>
-  if('serviceWorker' in navigator){ navigator.serviceWorker.register('./sw.js'); }
-  document.getElementById('y').textContent = new Date().getFullYear();
-</script>
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Los productos de Kumi han cambiado mi vida. Después de años de problemas digestivos, encontré alivio con sus suplementos naturales."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <h4>María González</h4>
+                        <span>Cliente desde 2021</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"La calidad de los productos es excepcional. Me encanta que son completamente naturales y realmente funcionan."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <h4>Carlos Rodríguez</h4>
+                        <span>Cliente desde 2020</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Recomiendo Laboratorios Kumi a todos mis amigos. Sus productos han mejorado mi energía y vitalidad significativamente."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <h4>Ana Martínez</h4>
+                        <span>Cliente desde 2022</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Suscríbete a nuestro boletín</h2>
+                <p>Recibe información sobre nuevos productos, ofertas especiales y consejos de salud.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Tu correo electrónico" required>
+                    <button type="submit" class="btn btn-primary">Suscribirse</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <img src="images/logo-kumi.png" alt="Laboratorios Kumi">
+                    </div>
+                    <p>Laboratorios Kumi se dedica a proporcionar productos naturales de la más alta calidad para mejorar tu bienestar y salud.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="catalog.html">Catálogo</a></li>
+                        <li><a href="about.html">Nosotros</a></li>
+                        <li><a href="contact.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categorías</h3>
+                    <ul>
+                        <li><a href="catalog.html?category=suplementos">Suplementos</a></li>
+                        <li><a href="catalog.html?category=vitaminas">Vitaminas</a></li>
+                        <li><a href="catalog.html?category=minerales">Minerales</a></li>
+                        <li><a href="catalog.html?category=extractos">Extractos Naturales</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Dirección: Asunción, Paraguay</li>
+                        <li><i class="fas fa-phone"></i> Teléfono: +595 21 123 456</li>
+                        <li><i class="fas fa-envelope"></i> Email: info@laboratorioskumi.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Laboratorios Kumi. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>
