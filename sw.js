@@ -1,20 +1,36 @@
-// Service Worker simple
-const CACHE = 'kumi-cache-static-v1';
-const ASSETS = [
-  './','./index.html','./producto.html','./categorias.html','./acerca.html','./contacto.html',
-  './assets/styles.css','./js/config.js','./js/utils.js','./js/app.js','./js/detail.js'
+const CACHE_NAME = 'kumi-lab-v1';
+const urlsToCache = [
+  '/',
+  '/index.html',
+  '/acerca.html',
+  '/categorias.html',
+  '/contacto.html',
+  '/producto.html',
+  '/assets/style.css',
+  '/js/main.js',
+  '/js/catalog.js',
+  '/js/product.js',
+  '/assets/images/logo-kumi.png'
 ];
-self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
+
+self.addEventListener('install', function(event) {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(function(cache) {
+        return cache.addAll(urlsToCache);
+      })
+  );
 });
-self.addEventListener('activate', e => {
-  e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k!==CACHE).map(k => caches.delete(k)))));
-});
-self.addEventListener('fetch', e => {
-  const url = new URL(e.request.url);
-  if(url.origin===location.origin){
-    e.respondWith(caches.match(e.request).then(r => r || fetch(e.request)));
-  }else{
-    e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)));
-  }
+
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request);
+      }
+    )
+  );
 });
