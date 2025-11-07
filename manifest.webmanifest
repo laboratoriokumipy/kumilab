@@ -1,9 +1,1 @@
-{
-  "name": "KumiLab Catálogo",
-  "short_name": "KumiLab",
-  "start_url": "index.html",
-  "display": "standalone",
-  "background_color": "#0e1111",
-  "theme_color": "#0b7a6e",
-  "icons": []
-}
+{"name": "NaturaVida Cat\u00e1logo", "short_name": "NaturaVida", "start_url": "index.html", "display": "standalone", "background_color": "#020817", "theme_color": "#020817", "icons": []}

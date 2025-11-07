@@ -3,44 +3,47 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>KumiLab · Categorías</title>
+  <title>Categorías · NaturaVida</title>
+  <meta name="theme-color" content="#020817">
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script defer src="js/config.js"></script>
   <script defer src="js/utils.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      const cont = document.getElementById('categories');
-      const rows = await window.kumi.fetchSheet();
-      const products = rows.map(window.kumi.normalizeProduct).filter(p => p.nombre);
-      const cats = Array.from(new Set(products.map(p => p.categoria || 'General'))).sort();
-      cont.innerHTML = cats.map(c => 
-        `<a class="catcard" href="index.html?categoria=${window.kumi.slug(c)}">
-           <span>${c}</span>
-         </a>`
-      ).join('');
-    });
-  </script>
+  <script defer src="js/app.js"></script>
 </head>
 <body>
 <header class="topbar">
-  <a class="brand" href="./">Kumi<span>Lab</span></a>
-  <nav class="nav">
-    <a href="index.html">Catálogo</a>
-    <a class="active" href="categorias.html">Categorías</a>
-    <a href="acerca.html">Acerca de</a>
-    <a href="contacto.html">Contacto</a>
-  </nav>
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-logo">NV</div>
+      <div>
+        <div class="brand-title">NaturaVida</div>
+        <div class="brand-subtitle">Catálogo</div>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Catálogo</a>
+      <a href="categorias.html" class="active">Categorías</a>
+      <a href="acerca.html">Acerca</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </div>
 </header>
+
 <main class="container">
-  <h1>Categorías</h1>
-  <div id="categories" class="catgrid"></div>
+  <section class="page-block">
+    <h1>Categorías destacadas</h1>
+    <p>Vista de resumen según la clasificación definida en la hoja Productos. Seleccione una categoría en la parte superior del catálogo para filtrar los resultados.</p>
+  </section>
 </main>
+
 <footer class="footer">
-  <p>© <span id="y"></span> KumiLab.</p>
+  <p>© <span id="y"></span> NaturaVida.</p>
 </footer>
-<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>

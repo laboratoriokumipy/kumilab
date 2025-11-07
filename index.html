@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>KumiLab · Catálogo</title>
-  <meta name="theme-color" content="#0b7a6e">
+  <title>NaturaVida · Catálogo</title>
+  <meta name="theme-color" content="#020817">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,44 +16,93 @@
 </head>
 <body>
 <header class="topbar">
-  <a class="brand" href="./">Kumi<span>Lab</span></a>
-  <nav class="nav">
-    <a href="index.html" class="active">Catálogo</a>
-    <a href="categorias.html">Categorías</a>
-    <a href="acerca.html">Acerca de</a>
-    <a href="contacto.html">Contacto</a>
-  </nav>
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-logo">NV</div>
+      <div>
+        <div class="brand-title">NaturaVida</div>
+        <div class="brand-subtitle">Catálogo profesional conectado a Google Sheets</div>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="index.html" class="active">Catálogo</a>
+      <a href="categorias.html">Categorías</a>
+      <a href="acerca.html">Acerca</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </div>
 </header>
 
 <section class="hero">
-  <h1>Catálogo de Productos</h1>
-  <p>Resultados actualizados desde Google Sheets, con imágenes servidas desde Google Drive.</p>
-  <div class="controls">
-    <input id="search" type="search" placeholder="Buscar nombre, categoría o etiqueta">
-    <select id="order">
-      <option value="relevance">Ordenar por relevancia</option>
-      <option value="name_asc">Nombre A→Z</option>
-      <option value="name_desc">Nombre Z→A</option>
-      <option value="price_asc">Precio más bajo</option>
-      <option value="price_desc">Precio más alto</option>
-      <option value="recent">Más recientes</option>
-    </select>
-    <div class="chipbar" id="chipbar"></div>
+  <div class="hero-left">
+    <h1>Catálogo NaturaVida</h1>
+    <p>Exploración rápida sobre datos en vivo desde Google Sheets, con imágenes almacenadas en Google Drive, filtros inteligentes y una experiencia de vitrina digital optimizada.</p>
+    <div class="hero-highlights">
+      <span class="pill">Actualización automática desde planilla</span>
+      <span class="pill">Imágenes desde Google Drive</span>
+      <span class="pill">Búsqueda difusa y orden dinámico</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#grid" class="btn btn-primary">Ver productos</a>
+      <a href="acerca.html" class="btn btn-outline">Cómo funciona</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hero-card-label">Resumen en tiempo real</div>
+      <div class="hero-card-metric">
+        <div class="metric-label">Productos activos</div>
+        <div class="metric-value" id="metricProductos">0</div>
+      </div>
+      <div class="hero-card-metric">
+        <div class="metric-label">Categorías</div>
+        <div class="metric-value" id="metricCategorias">0</div>
+      </div>
+      <p class="hero-card-note">Los valores se calculan en base a la hoja Productos, no requieren edición de este sitio.</p>
+    </div>
+  </div>
+</section>
+
+<section class="filters">
+  <div class="filters-inner">
+    <div class="filter">
+      <label for="search">Buscar</label>
+      <input id="search" type="search" placeholder="Nombre, categoría, etiqueta o descripción">
+    </div>
+    <div class="filter">
+      <label for="order">Ordenar por</label>
+      <select id="order">
+        <option value="relevance">Relevancia</option>
+        <option value="name_asc">Nombre A a Z</option>
+        <option value="name_desc">Nombre Z a A</option>
+        <option value="price_asc">Precio más bajo</option>
+        <option value="price_desc">Precio más alto</option>
+        <option value="recent">Más recientes</option>
+      </select>
+    </div>
+    <div class="filter">
+      <label>Categorías</label>
+      <div id="chipbar" class="chipbar"></div>
+    </div>
+    <div class="filter summary-block">
+      <div id="summary" class="summary">Cargando catálogo...</div>
+      <button id="clearFilters" class="btn btn-small">Limpiar filtros</button>
+    </div>
   </div>
 </section>
 
 <main class="container">
-  <div id="summary" class="summary"></div>
   <div id="grid" class="grid"></div>
   <div id="pager" class="pager"></div>
 </main>
 
 <footer class="footer">
-  <p>© <span id="y"></span> KumiLab. Catálogo dinámico con Google Sheets.</p>
+  <p>© <span id="y"></span> NaturaVida. Catálogo dinámico integrado con Google Sheets y Google Drive.</p>
+  <p class="footer-note">Para registrar o editar productos utilice el panel de administración existente basado en Apps Script que escribe sobre la misma hoja. Este sitio solo lectura respeta esa estructura y aprovecha todos los campos disponibles.</p>
 </footer>
 
 <script>
-  if('serviceWorker' in navigator){ navigator.serviceWorker.register('./sw.js'); }
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('./sw.js').catch(function(){}); }
   document.getElementById('y').textContent = new Date().getFullYear();
 </script>
 </body>

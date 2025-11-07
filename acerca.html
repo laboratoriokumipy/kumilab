@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>KumiLab · Acerca de</title>
+  <title>Acerca de NaturaVida · Catálogo</title>
+  <meta name="theme-color" content="#020817">
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,27 +12,42 @@
 </head>
 <body>
 <header class="topbar">
-  <a class="brand" href="./">Kumi<span>Lab</span></a>
-  <nav class="nav">
-    <a href="index.html">Catálogo</a>
-    <a href="categorias.html">Categorías</a>
-    <a class="active" href="acerca.html">Acerca de</a>
-    <a href="contacto.html">Contacto</a>
-  </nav>
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-logo">NV</div>
+      <div>
+        <div class="brand-title">NaturaVida</div>
+        <div class="brand-subtitle">Catálogo</div>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Catálogo</a>
+      <a href="categorias.html">Categorías</a>
+      <a href="acerca.html" class="active">Acerca</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </div>
 </header>
-<main class="container narrow">
-  <h1>Acerca de KumiLab</h1>
-  <p>KumiLab desarrolla soluciones en laboratorio y venta de insumos con foco en calidad, trazabilidad y soporte técnico.</p>
-  <ul>
-    <li>Catálogo centralizado alimentado desde Google Sheets.</li>
-    <li>Imágenes administradas en Google Drive.</li>
-    <li>Diseño responsivo, rápido y accesible.</li>
-    <li>PWA con caché para navegación sin conexión básica.</li>
-  </ul>
+
+<main class="container">
+  <section class="page-block">
+    <h1>Acerca del catálogo NaturaVida</h1>
+    <p>Este catálogo está construido como una interfaz de solo lectura sobre una hoja de cálculo de Google Sheets. El alta, actualización y eliminación de productos se realiza desde el panel administrativo desarrollado con Apps Script que ya se encuentra operativo.</p>
+    <p>El sitio consume la hoja mediante la API GViz, interpreta columnas con nombres flexibles y genera tarjetas enriquecidas con imágenes, etiquetas, precios y atributos adicionales.</p>
+    <ul>
+      <li>Lectura directa desde la pestaña <strong>Productos</strong>.</li>
+      <li>Compatibilidad con campos ID_Producto, Nombre_Producto, Categoria, Descripcion_Corta, Precio, Imagen_URL_1, así como variantes equivalentes.</li>
+      <li>Soporte para múltiples imágenes por producto y vínculos de Google Drive convertidos a formato embebible.</li>
+      <li>Búsqueda difusa, filtros por categoría y ordenamientos configurables.</li>
+    </ul>
+  </section>
 </main>
+
 <footer class="footer">
-  <p>© <span id="y"></span> KumiLab.</p>
+  <p>© <span id="y"></span> NaturaVida.</p>
 </footer>
-<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>

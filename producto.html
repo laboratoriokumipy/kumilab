@@ -3,34 +3,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>KumiLab · Producto</title>
-  <link rel="stylesheet" href="assets/styles.css">
+  <title>Detalle de producto · NaturaVida</title>
+  <meta name="theme-color" content="#020817">
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
   <script defer src="js/config.js"></script>
   <script defer src="js/utils.js"></script>
   <script defer src="js/detail.js"></script>
 </head>
 <body>
 <header class="topbar">
-  <a class="brand" href="./">Kumi<span>Lab</span></a>
-  <nav class="nav">
-    <a href="index.html">Catálogo</a>
-    <a href="categorias.html">Categorías</a>
-    <a href="acerca.html">Acerca de</a>
-    <a href="contacto.html">Contacto</a>
-  </nav>
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-logo">NV</div>
+      <div>
+        <div class="brand-title">NaturaVida</div>
+        <div class="brand-subtitle">Catálogo</div>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Catálogo</a>
+      <a href="categorias.html">Categorías</a>
+      <a href="acerca.html">Acerca</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </div>
 </header>
 
-<main class="container narrow">
-  <div id="product"></div>
-  <div class="backlink"><a href="index.html">← Volver al catálogo</a></div>
+<main class="container">
+  <div id="product" class="product-detail"></div>
+  <div class="backlink">
+    <a href="index.html" class="btn btn-small">Volver al catálogo</a>
+  </div>
 </main>
 
 <footer class="footer">
-  <p>© <span id="y"></span> KumiLab.</p>
+  <p>© <span id="y"></span> NaturaVida.</p>
 </footer>
-<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>

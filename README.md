@@ -1,41 +1,32 @@
-# Sitio estático — Laboratorios Kumi
+# NaturaVida · Catálogo estático mejorado
 
-Este repositorio publica un catálogo de productos con **GitHub Pages** y consume los datos directamente de una **Google Sheet** y las imágenes guardadas en **Google Drive**.
+Estructura preparada para ser publicada en GitHub Pages como catálogo de solo lectura.
 
-## Requisitos previos
-1. Hacer pública la hoja: abrir la hoja en Google Sheets y usar Archivo → Publicar en la web. Debe ser visible para cualquiera con el enlace.
-2. Usar el nombre de pestaña `Productos` o actualizar `SHEET_NAME` en `js/config.js`.
-3. Las imágenes deben ser compartidas como "Cualquiera con el enlace". Si la URL proviene de Drive, el sitio convierte automáticamente links como `https://drive.google.com/file/d/<ID>/view` en `https://drive.google.com/uc?export=view&id=<ID>`.
+La información se obtiene desde Google Sheets (pestaña `Productos`) mediante la URL GViz, sin modificar la lógica existente de guardado que se realiza desde Apps Script sobre la misma hoja.
 
-## Estructura
-```
-.
-├── index.html                # Catálogo con búsqueda, filtros y ordenación
-├── producto.html             # Vista de detalle ?product=<id>
-├── categorias.html           # Explorador por categorías
-├── contacto.html             # Contacto
-├── acerca.html               # Información de la empresa
-├── manifest.webmanifest      # PWA
-├── js/
-│   ├── config.js             # IDs y parámetros de la fuente
-│   ├── utils.js              # Utilidades comunes
-│   ├── app.js                # Lógica de catálogo
-│   └── detail.js             # Lógica de detalle
-├── assets/
-│   └── styles.css            # Estilos base
-└── sw.js                     # Service Worker (caché)
-```
+## Columnas soportadas
 
-## Despliegue en GitHub Pages
-1. Subir todo el contenido a la rama `main` del repositorio.
-2. En Settings → Pages, seleccionar la rama `main` y la carpeta root `/`.
-3. Esperar a que se publique y comprobar la URL.
+Se reconocen de forma flexible los siguientes campos (no son todos obligatorios):
 
-## Parámetros de URL
-- `producto.html?product=<id>`: abre directamente la ficha del producto.
-- `index.html?categoria=<slug>`: prefiltra por categoría.
-- `index.html?q=<texto>`: búsqueda inicial.
+- `ID_Producto`, `Id_Producto`, `id`, `ID`, `codigo`, `Codigo`
+- `Nombre_Producto`, `Nombre`, `Producto`, `PRODUCTo`
+- `Categoria`, `categoria`
+- `Precio`, `Precio_py`, `Precio_PYG`, `precio_py`, `Precio_sugerido`
+- `Descripcion_Corta`, `Descripcion_Larga`, `Descripcion`, `descripcion`
+- `Imagen_URL_1`, `Imagen_URL_2`, `Imagen_URL`, `Imagen`, `Foto`, `Galeria`, `imagenes`
+- `Etiquetas`, `etiquetas`, `Tags`, `tags`
+- `Stock`, `stock`
+- `Destacado`, `destacado`
+- `SKU`, `sku`
+- `Unidad`, `unidad`
+- `Presentacion`, `presentacion`
+- `Creado`, `creado`, `Timestamp`, `timestamp`
 
-## Personalización
-- Editar colores en `assets/styles.css`.
-- Cambiar la marca en el encabezado de `index.html` y `acerca.html`.
+Los enlaces de Google Drive se convierten automáticamente a formato embebible mediante `https://drive.google.com/uc?export=view&id=...`.
+
+## Uso
+
+1. Ajustar `SHEET_ID` y `SHEET_NAME` en `js/config.js` si corresponde.
+2. Subir todo el contenido de `kumilab_enhanced` a la rama configurada para GitHub Pages.
+3. Verificar que la hoja `Productos` sea pública de solo lectura o compartida para quien tenga el enlace, de modo que GViz pueda entregar los datos.
+4. El panel de administración existente en Apps Script continúa escribiendo en la misma hoja sin requerir cambios.

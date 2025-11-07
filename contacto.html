@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>KumiLab · Contacto</title>
+  <title>Contacto · NaturaVida</title>
+  <meta name="theme-color" content="#020817">
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,28 +12,36 @@
 </head>
 <body>
 <header class="topbar">
-  <a class="brand" href="./">Kumi<span>Lab</span></a>
-  <nav class="nav">
-    <a href="index.html">Catálogo</a>
-    <a href="categorias.html">Categorías</a>
-    <a href="acerca.html">Acerca de</a>
-    <a class="active" href="contacto.html">Contacto</a>
-  </nav>
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-logo">NV</div>
+      <div>
+        <div class="brand-title">NaturaVida</div>
+        <div class="brand-subtitle">Catálogo</div>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Catálogo</a>
+      <a href="categorias.html">Categorías</a>
+      <a href="acerca.html">Acerca</a>
+      <a href="contacto.html" class="active">Contacto</a>
+    </nav>
+  </div>
 </header>
-<main class="container narrow">
-  <h1>Contacto</h1>
-  <p>Para cotizaciones o consultas, complete el formulario o escriba por WhatsApp.</p>
-  <form class="form" action="https://formspree.io/f/mnqkkwra" method="POST">
-    <label>Nombre<input type="text" name="nombre" required></label>
-    <label>Correo<input type="email" name="correo" required></label>
-    <label>Mensaje<textarea name="mensaje" rows="6" required></textarea></label>
-    <button type="submit">Enviar</button>
-  </form>
-  <p class="muted">Puede reemplazar el endpoint por su servicio preferido o Google Apps Script WebApp.</p>
+
+<main class="container">
+  <section class="page-block">
+    <h1>Contacto comercial</h1>
+    <p>Para consultas sobre productos, precios o disponibilidad utilice los canales habituales de NaturaVida o el botón de WhatsApp disponible en cada ficha de producto.</p>
+    <p>Este módulo puede personalizarse para mostrar datos de contacto específicos, horarios de atención o enlaces a redes sociales.</p>
+  </section>
 </main>
+
 <footer class="footer">
-  <p>© <span id="y"></span> KumiLab.</p>
+  <p>© <span id="y"></span> NaturaVida.</p>
 </footer>
-<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>

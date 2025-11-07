@@ -1,92 +1,240 @@
-// Utilidades comunes
+// Utilidades comunes y normalización de datos
 window.kumi = window.kumi || {};
 
-window.kumi.slug = (s='') => String(s).toLowerCase()
-  .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-  .replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+// Conversión a slug
+window.kumi.slug = function(s){
+  return String(s || "")
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/[^a-z0-9]+/g,"-")
+    .replace(/(^-|-$)/g,"");
+};
 
-window.kumi.currency = v => new Intl.NumberFormat('es-PY',{style:'currency',currency:'PYG',maximumFractionDigits:0}).format(v||0);
+// Formato moneda (PYG)
+window.kumi.currency = function(v){
+  var n = Number(v || 0);
+  return new Intl.NumberFormat("es-PY", {
+    style: "currency",
+    currency: "PYG",
+    maximumFractionDigits: 0
+  }).format(n);
+};
 
-window.kumi.qs = key => new URLSearchParams(location.search).get(key);
+// Obtener parámetro de querystring
+window.kumi.qs = function(key){
+  return new URLSearchParams(window.location.search).get(key);
+};
 
-window.kumi.parseGViz = (txt) => {
-  const json = JSON.parse(txt.substring(txt.indexOf('{'), txt.lastIndexOf('}')+1));
-  const cols = json.table.cols.map(c => c.label || c.id || `col${Math.random()}`);
-  const rows = json.table.rows.map(r => {
-    const o = {};
-    cols.forEach((c,i) => { o[c] = r.c[i] ? r.c[i].v : null; });
+// Parseo de respuesta GViz a arreglo de objetos fila
+window.kumi.parseGViz = function(txt){
+  var json = JSON.parse(
+    txt.substring(txt.indexOf("{"), txt.lastIndexOf("}") + 1)
+  );
+  var cols = json.table.cols.map(function(c, i){
+    return c.label || c.id || "col" + i;
+  });
+  var rows = json.table.rows.map(function(r){
+    var o = {};
+    r.c.forEach(function(cell, i){
+      o[cols[i]] = cell ? (cell.f || cell.v) : "";
+    });
     return o;
   });
   return rows;
 };
 
-window.kumi.fetchSheet = async () => {
-  const key = 'kumi-cache-v1';
+// Lectura con caché local
+window.kumi.fetchSheet = async function(){
+  var key = "naturavida-cache-v1";
   try{
-    const cached = JSON.parse(localStorage.getItem(key) || 'null');
-    if(cached && Date.now() - cached.ts < window.kumi.CACHE_MS) return cached.rows;
+    var cached = JSON.parse(localStorage.getItem(key) || "null");
+    if(cached && Date.now() - cached.ts < window.kumi.CACHE_MS){
+      return cached.rows;
+    }
   }catch(e){}
-  const res = await fetch(window.kumi.GVIZ_URL, {cache:'no-store'});
-  const txt = await res.text();
-  const rows = window.kumi.parseGViz(txt);
-  try{ localStorage.setItem(key, JSON.stringify({ts:Date.now(), rows})); }catch(e){}
+  var res = await fetch(window.kumi.GVIZ_URL, { cache: "no-store" });
+  var txt = await res.text();
+  var rows = window.kumi.parseGViz(txt);
+  try{
+    localStorage.setItem(key, JSON.stringify({ ts: Date.now(), rows: rows }));
+  }catch(e){}
   return rows;
 };
 
-window.kumi.driveToDirect = (u) => {
+// Conversión de enlaces de Drive a URL directa para <img>
+window.kumi.driveToDirect = function(u){
   if(!u) return null;
-  const idMatch = String(u).match(/[-\w]{25,}/);
-  const id = idMatch ? idMatch[0] : null;
-  return id ? `https://drive.google.com/uc?export=view&id=${id}` : u;
+  var s = String(u).trim();
+  if(!s) return null;
+  var idMatch = s.match(/[-\w]{25,}/);
+  var id = idMatch ? idMatch[0] : null;
+  if(id) return "https://drive.google.com/uc?export=view&id=" + id;
+  return s;
 };
 
-window.kumi.parseImages = (s) => {
+// Lista de imágenes a partir de una cadena con separadores
+window.kumi.parseImages = function(s){
   if(!s) return [];
-  return String(s).split(/[;|,\n]/).map(x => x.trim()).filter(Boolean).map(window.kumi.driveToDirect);
+  return String(s)
+    .split(/[;|,\n]/)
+    .map(function(x){ return x.trim(); })
+    .filter(Boolean)
+    .map(window.kumi.driveToDirect);
 };
 
-window.kumi.parseTags = (s) => {
+// Lista de etiquetas normalizadas
+window.kumi.parseTags = function(s){
   if(!s) return [];
-  return String(s).split(/[;|,]/).map(x => x.trim().toLowerCase()).filter(Boolean);
+  return String(s)
+    .split(/[;|,]/)
+    .map(function(x){ return x.trim(); })
+    .filter(Boolean);
 };
 
-window.kumi.normalizeProduct = (row) => {
-  const id = row.id || row.ID || row.Id || row.codigo || row.CODIGO || row.Codigo;
-  const precio = Number(row.precio || row.Precio || row.precio_py || row.Precio_PYG || 0);
-  const nombre = row.nombre || row.Nombre || row.PRODUCTO || row.Producto;
-  const categoria = row.categoria || row.Categoria || 'General';
-  const imagenes = window.kumi.parseImages(row.imagen || row.Imagen || row.foto || row.Foto || row.imagenes || row.Galeria);
-  const etiquetas = window.kumi.parseTags(row.etiquetas || row.tags || row.Tags);
-  const creado = row.creado || row.Creado || row.timestamp || row.Timestamp;
-  const stock = Number(row.stock ?? row.Stock ?? -1);
+// Normalización flexible de columnas de la hoja
+window.kumi.normalizeProduct = function(row){
+  row = row || {};
+
+  var id =
+    row.ID_Producto ||
+    row.Id_Producto ||
+    row.id ||
+    row.ID ||
+    row.Id ||
+    row.codigo ||
+    row.Codigo ||
+    row.CODIGO;
+
+  var nombre =
+    row.Nombre_Producto ||
+    row.Nombre ||
+    row.PRODUCTO ||
+    row.Producto ||
+    row.nombre;
+
+  var categoria =
+    row.Categoria ||
+    row.categoria ||
+    row.CATEGORIA ||
+    "General";
+
+  var precio =
+    row.Precio_py ||
+    row.Precio_PYG ||
+    row.Precio ||
+    row.precio ||
+    row.precio_py ||
+    row.Precio_sugerido;
+  precio = precio === "" || precio === null ? null : Number(precio);
+
+  var imagenSources = [];
+  var camposImg = [
+    "Imagen_URL_1",
+    "Imagen_URL_2",
+    "Imagen_URL",
+    "Imagen",
+    "Imagen1",
+    "Imagen2",
+    "Foto",
+    "foto",
+    "Galeria",
+    "imagenes"
+  ];
+  camposImg.forEach(function(k){
+    if(row[k]) imagenSources = imagenSources.concat(window.kumi.parseImages(row[k]));
+  });
+
+  var etiquetas =
+    window.kumi.parseTags(
+      row.Etiquetas ||
+      row.etiquetas ||
+      row.Tags ||
+      row.tags ||
+      row.Categoria ||
+      row.categoria
+    );
+
+  var descripcion =
+    row.Descripcion_Larga ||
+    row.Descripcion_Corta ||
+    row.descripcion ||
+    row.Descripcion ||
+    "";
+
+  var creado =
+    row.Creado ||
+    row.creado ||
+    row.Timestamp ||
+    row.timestamp ||
+    "";
+
+  var stockVal = row.Stock != null ? row.Stock : row.stock;
+  var stock =
+    stockVal === "" || stockVal == null ? null : Number(stockVal);
+
+  var destacadoRaw = String(
+    row.Destacado ||
+    row.destacado ||
+    ""
+  ).trim().toLowerCase();
+  var destacado =
+    destacadoRaw === "si" ||
+    destacadoRaw === "true" ||
+    destacadoRaw === "1" ||
+    destacadoRaw === "destacado";
+
+  var sku = row.SKU || row.sku || "";
+  var unidad = row.Unidad || row.unidad || "";
+  var presentacion = row.Presentacion || row.presentacion || "";
+
+  var imagenes = imagenSources.filter(Boolean);
+
+  var finalId = id
+    ? String(id).trim()
+    : (nombre ? window.kumi.slug(nombre) : "prod-" + Math.random().toString(36).slice(2));
+
   return {
-    id: id ? String(id) : `auto-${crypto.randomUUID()}`,
-    nombre: nombre || 'Producto',
-    categoria,
-    precio,
-    descripcion: row.descripcion || row.Descripcion || '',
-    imagenes,
-    etiquetas,
-    stock,
-    sku: row.sku || row.SKU || '',
-    unidad: row.unidad || row.Unidad || '',
-    presentacion: row.presentacion || row.Presentacion || '',
-    destacado: String(row.destacado || row.Destacado || '').toLowerCase().includes('si'),
-    creado
+    id: finalId,
+    nombre: nombre || "Producto sin nombre",
+    categoria: categoria || "General",
+    precio: precio && !isNaN(precio) ? Number(precio) : null,
+    descripcion: descripcion,
+    imagenes: imagenes,
+    etiquetas: etiquetas,
+    stock: !isNaN(stock) ? stock : null,
+    sku: sku,
+    unidad: unidad,
+    presentacion: presentacion,
+    destacado: destacado,
+    creado: creado
   };
 };
 
-window.kumi.fuzzyScore = (text, q) => {
-  text = String(text||'').toLowerCase(); q = String(q||'').toLowerCase();
+// Puntuación simple para búsqueda difusa
+window.kumi.fuzzyScore = function(text, q){
+  text = String(text || "").toLowerCase();
+  q = String(q || "").toLowerCase();
   if(!q) return 1;
-  let i=0, score=0;
-  for(const ch of text){
-    if(ch===q[i]){ score+=2; i++; if(i===q.length) break; }
-    else if(q.includes(ch)) score += .5;
+  var i = 0;
+  var score = 0;
+  for(var idx = 0; idx < text.length; idx++){
+    var ch = text[idx];
+    if(ch === q[i]){
+      score += 2;
+      i++;
+      if(i === q.length) break;
+    }else if(q.indexOf(ch) >= 0){
+      score += 0.4;
+    }
   }
-  return score / Math.max(q.length,1);
+  return score / Math.max(q.length, 1);
 };
 
-window.kumi.chunk = (arr, size) => {
-  const out=[]; for(let i=0;i<arr.length;i+=size) out.push(arr.slice(i,i+size)); return out;
+// Fragmentar arreglo
+window.kumi.chunk = function(arr, size){
+  var out = [];
+  for(var i = 0; i < arr.length; i += size){
+    out.push(arr.slice(i, i + size));
+  }
+  return out;
 };
